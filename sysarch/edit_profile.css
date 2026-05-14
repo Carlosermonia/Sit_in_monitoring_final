@@ -1,0 +1,439 @@
+/* ══════════════════════════════════════════
+   EDIT PROFILE — UC CCS SIT MONITORING
+   Overrides dashboard.css where needed
+   ══════════════════════════════════════════ */
+
+/* ── LAYOUT OVERRIDE ──
+   dashboard.css sets: grid-template-columns: 320px 1fr 1fr
+   We override to a clean 2-column layout for this page only */
+.dashboard-container.edit-page-container {
+    display: grid !important;
+    grid-template-columns: 280px 1fr !important;
+    gap: 2rem !important;
+    max-width: 1100px !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+    padding: 100px 2rem 3rem !important;
+    align-items: start !important;
+    box-sizing: border-box !important;
+}
+
+/* ── STICKY SIDEBAR ── */
+.sticky-panel {
+    position: sticky;
+    top: 88px;
+    height: max-content;
+}
+
+/* ══════════════════════════════════════════
+   SIDEBAR — override dashboard's white card
+   ══════════════════════════════════════════ */
+.edit-page-container .info-panel {
+    background: linear-gradient(160deg, #2D0F5E 0%, #4A1E8A 55%, #6B32B8 100%) !important;
+    border-radius: 18px !important;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(45,15,94,0.2), 0 20px 50px rgba(74,30,138,0.3) !important;
+    border: 1px solid rgba(255,255,255,0.08);
+}
+
+/* Override dashboard's purple-bg panel-header inside sidebar */
+.edit-page-container .info-panel .panel-header {
+    background: transparent !important;
+    color: rgba(255,255,255,0.45) !important;
+    font-family: 'Playfair Display', serif !important;
+    font-size: 0.65rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.15em !important;
+    text-transform: uppercase !important;
+    padding: 1.4rem 1.6rem 0 !important;
+    border: none !important;
+}
+
+.profile-card {
+    padding: 1.2rem 1.6rem 1.8rem !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 1.2rem !important;
+}
+
+/* Override dashboard's square avatar */
+.edit-page-container .avatar-frame {
+    width: 200px !important;
+    height: 200px !important;
+    border-radius: 50% !important;
+    padding: 3px !important;
+    background: linear-gradient(135deg, #C9952A, #F0C060, #C9952A) !important;
+    border: none !important;
+    box-shadow: 0 8px 32px rgba(201,149,42,0.4) !important;
+    margin: 0 !important;
+    overflow: visible !important;
+}
+
+.edit-page-container .avatar-frame img {
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: 50% !important;
+    object-fit: cover !important;
+    border: 3px solid #2D0F5E !important;
+    display: block !important;
+}
+
+/* Override dashboard's info-list */
+.edit-page-container .info-list {
+    width: 100%;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0 !important;
+}
+
+.edit-page-container .info-item {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 0.15rem !important;
+    padding: 0.75rem 0 !important;
+    border-bottom: 1px solid rgba(255,255,255,0.07) !important;
+}
+
+.edit-page-container .info-item:last-child {
+    border-bottom: none !important;
+}
+
+.edit-page-container .info-item .label {
+    font-size: 0.6rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.1em !important;
+    text-transform: uppercase !important;
+    color: #C9952A !important;
+    width: auto !important;
+}
+
+.edit-page-container .info-item .val {
+    font-size: 0.84rem !important;
+    font-weight: 500 !important;
+    color: rgba(255,255,255,0.92) !important;
+    word-break: break-word !important;
+}
+
+/* ══════════════════════════════════════════
+   MAIN FORM PANEL
+   dashboard.css has no .main-form-panel,
+   but .form-panel gets .info-panel styles
+   ══════════════════════════════════════════ */
+.main-form-panel {
+    background: #ffffff !important;
+    border-radius: 18px !important;
+    box-shadow: 0 2px 4px rgba(74,30,138,0.05), 0 12px 40px rgba(74,30,138,0.11) !important;
+    border: 1px solid rgba(74,30,138,0.09) !important;
+    overflow: hidden !important;
+    min-width: 0;
+}
+
+/* Override dashboard's purple panel-header for the form panel */
+.main-form-panel .panel-header {
+    background: linear-gradient(90deg, #faf8ff, #ffffff) !important;
+    color: #2D0F5E !important;
+    font-family: 'Playfair Display', serif !important;
+    font-size: 1.05rem !important;
+    font-weight: 700 !important;
+    text-transform: none !important;
+    letter-spacing: 0 !important;
+    padding: 1.4rem 2rem !important;
+    border-bottom: 1.5px solid #f0ecfc !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.7rem !important;
+}
+
+.main-form-panel .panel-header::before {
+    content: '';
+    display: inline-block;
+    width: 4px;
+    height: 1.1rem;
+    background: linear-gradient(180deg, #C9952A, #F0C060);
+    border-radius: 4px;
+    flex-shrink: 0;
+}
+
+/* Override dashboard's .scroll-box height */
+.main-form-panel .form-content {
+    padding: 1.8rem 2.4rem 2.4rem !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow-y: visible !important;
+}
+
+.main-form-panel .form-content::-webkit-scrollbar { width: 4px; }
+.main-form-panel .form-content::-webkit-scrollbar-track { background: #f5f3ff; border-radius: 10px; }
+.main-form-panel .form-content::-webkit-scrollbar-thumb { background: #c4b8e8; border-radius: 10px; }
+
+/* ══════════════════════════════════════════
+   FORM SECTIONS
+   ══════════════════════════════════════════ */
+.presentable-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.form-section {
+    padding: 1.2rem 0;
+    border-bottom: 1px solid #f0ecfc;
+}
+
+.form-section:last-of-type {
+    border-bottom: none;
+    padding-bottom: 0.5rem;
+    padding-top: 1.8rem;
+}
+
+.form-section-title {
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #C9952A;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+}
+
+.form-section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, #e8e3f8, transparent);
+}
+
+/* ── GRID ── */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.85rem 1.1rem;
+}
+
+.split-3 {
+    grid-template-columns: 2fr 1fr;
+}
+
+/* ── FIELD ── */
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    margin-bottom: 0.85rem;
+}
+
+.form-grid .field,
+.field:last-child {
+    margin-bottom: 0;
+}
+
+.field label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #4A1E8A;
+    display: block;
+}
+
+/* ── INPUTS & SELECTS — uniform height ── */
+.field input,
+.field select,
+.presentable-form input {
+    width: 100%;
+    height: 44px;
+    padding: 0 1rem;
+    border: 1.5px solid #e0daf4;
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem;
+    color: #1A0A3B;
+    background: #fdfbff;
+    transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+    box-sizing: border-box;
+}
+
+.field input:hover,
+.field select:hover { border-color: #b8aee0; }
+
+.field input:focus,
+.field select:focus,
+.presentable-form input:focus {
+    border-color: #4A1E8A;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(74,30,138,0.1);
+    outline: none;
+}
+
+/* ── FILE INPUT ── */
+input[type="file"] {
+    height: auto !important;
+    padding: 0.5rem 1rem !important;
+    background: #f7f4ff !important;
+    border: 1.5px dashed #c4b8e8 !important;
+    border-radius: 10px !important;
+    font-size: 0.82rem !important;
+    color: #4A1E8A !important;
+    cursor: pointer;
+    line-height: 1.4;
+}
+
+input[type="file"]:hover {
+    background: #efe9ff !important;
+    border-color: #4A1E8A !important;
+}
+
+/* ── LOCKED INPUT ── */
+.field-locked .input-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.field-locked input {
+    background: #f5f3fa !important;
+    color: #9a8fc0 !important;
+    border-color: #e8e3f5 !important;
+    cursor: not-allowed;
+    padding-left: 2.4rem !important;
+}
+
+.field-locked .field-icon {
+    position: absolute;
+    left: 0.8rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 15px;
+    height: 15px;
+    color: #b8aee0;
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* ── SELECT ── */
+.input-wrap { position: relative; }
+
+.field select {
+    padding-right: 2.4rem;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%234A1E8A'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.85rem center;
+    background-size: 0.9rem;
+    cursor: pointer;
+}
+
+select optgroup { font-weight: 700; color: #4A1E8A; background: #f8f5ff; font-style: normal; }
+select option { color: #1A0A3B; background: #fff; }
+
+/* ── SAVE BUTTON ── */
+.btn-primary {
+    display: block;
+    width: fit-content;
+    margin-top: 1.8rem;
+    margin-left: auto;
+    margin-right: 0;
+    padding: 0.7rem 2.2rem;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #4A1E8A 0%, #6B32B8 100%);
+    color: #fff;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    letter-spacing: 0.04em;
+    transition: transform 0.15s, box-shadow 0.2s, filter 0.2s;
+    box-shadow: 0 4px 16px rgba(74,30,138,0.32);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.13) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(74,30,138,0.42);
+    filter: brightness(1.07);
+}
+
+.btn-primary:active { transform: translateY(0); }
+
+/* ── ALERTS ── */
+.alert {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    padding: 0.75rem 1rem;
+    border-radius: 10px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    margin-bottom: 1.3rem;
+    animation: alertSlideIn 0.3s ease both;
+}
+
+.alert-error  { background: #fff4f4; border: 1.5px solid #ffc9c9; color: #c92a2a; }
+.alert-success { background: #f0fff8; border: 1.5px solid #96f2d7; color: #0ca678; }
+
+@keyframes alertSlideIn {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── BUTTON ROW ── */
+.btn-row {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 1.4rem;
+    margin-top: 0.4rem;
+    border-top: 0 solid #f0ecfc;
+}
+
+.btn-row .btn-primary {
+    margin: 0;
+    padding-top: 0;
+    border-top: none;
+    padding: 1rem 3rem;
+}
+
+.presentable-form > .btn-primary {
+    border-top: 1px solid #f0ecfc;
+    padding-top: 1.6rem;
+    margin-top: 0.5rem;
+    width: fit-content;
+    margin-left: auto;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 960px) {
+    .dashboard-container.edit-page-container {
+        grid-template-columns: 1fr !important;
+        padding: 88px 1.2rem 2rem !important;
+        gap: 1.2rem !important;
+    }
+
+    .sticky-panel { position: static; }
+
+    .edit-page-container .avatar-frame { width: 70px !important; height: 70px !important; }
+
+    .main-form-panel .form-content { max-height: none !important; }
+
+    .form-grid,
+    .split-3 { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 520px) {
+    .main-form-panel .panel-header { font-size: 0.95rem !important; padding: 1.1rem 1.3rem !important; }
+    .main-form-panel .form-content { padding: 1.2rem 1.3rem !important; }
+}

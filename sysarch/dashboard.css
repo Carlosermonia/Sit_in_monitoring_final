@@ -1,0 +1,453 @@
+/* ── RESET & ROOT ── */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --gold:       #C9952A;
+    --gold-lt:    #F0C060;
+    --purple:     #4A1E8A;
+    --purple-dk:  #2D0F5E;
+    --white:      #FFFFFF;
+    --offwhite:   #F7F5FF;
+    --text:       #1A0A3B;
+    --muted:      #7A6DA0;
+    --error:      #E03C3C;
+}
+
+html, body {
+    min-height: 100%;
+    font-family: 'DM Sans', sans-serif;
+    background: #BDA6CE;
+    color: var(--text);
+}
+
+/* ── NAVBAR ── */
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2.5rem;
+    height: 68px;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 2px solid var(--gold);
+    box-shadow: 0 2px 24px rgba(74, 30, 138, 0.08);
+    /* NO overflow:hidden here — it would clip the dropdown */
+}
+
+.nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    text-decoration: none;
+}
+
+.nav-brand img {
+    height: 44px;
+    width: auto;
+}
+
+.nav-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--purple);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    line-height: 1.3;
+    max-width: 260px;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+    list-style: none;
+}
+
+.nav-links > li > a {
+    text-decoration: none;
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--muted);
+    padding: 0.45rem 0.9rem;
+    border-radius: 6px;
+    transition: color 0.2s, background 0.2s;
+    display: inline-block;
+}
+
+.nav-links > li > a:hover {
+    color: var(--purple);
+    background: rgba(74, 30, 138, 0.06);
+}
+
+.nav-links > li > a.active {
+    color: var(--purple);
+    font-weight: 700;
+}
+
+.nav-links > li > a.btn-nav {
+    background: var(--gold);
+    color: var(--purple-dk);
+    font-weight: 600;
+    padding: 0.45rem 1.1rem;
+}
+
+/* ── NOTIFICATION ── */
+.notification-item {
+    position: relative;
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
+.notification-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.35rem 0.45rem;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    color: var(--muted);
+    transition: background 0.2s, color 0.2s;
+    height: 32px;
+}
+
+.notification-btn:hover {
+    background: rgba(74, 30, 138, 0.06);
+    color: var(--purple);
+}
+
+.notification-btn svg {
+    width: 25px;
+    height: 18px;
+    display: block;
+    stroke-width: 2;
+}
+
+.notification-badge {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    background: #E03C3C;
+    color: #fff;
+    font-size: 9px;
+    font-weight: 700;
+    min-width: 14px;
+    height: 14px;
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 2px;
+    line-height: 1;
+    pointer-events: none;
+}
+
+/* Use position:fixed so the dropdown escapes the nav's stacking context entirely */
+.notification-dropdown {
+    display: none;
+    position: fixed;
+    top: 68px;
+    right: 2.5rem;
+    width: 280px;
+    background: #fff;
+    border: 1px solid rgba(74, 30, 138, 0.15);
+    border-top: 2px solid var(--gold);
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.14);
+    z-index: 9999;
+    max-height: 340px;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.notification-dropdown.active {
+    display: flex;
+}
+
+.notification-header {
+    padding: 8px 12px;
+    font-weight: 700;
+    font-size: 0.78rem;
+    color: var(--purple-dk);
+    border-bottom: 1px solid #eee;
+    background: #faf8ff;
+    flex-shrink: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.notification-list {
+    overflow-y: auto;
+    flex: 1;
+}
+
+/* Individual entries — class is notification-entry NOT notification-item */
+.notification-entry {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 8px 12px;
+    border-bottom: 1px solid #f3f0fa;
+    transition: background 0.15s;
+}
+
+.notification-entry:last-child {
+    border-bottom: none;
+}
+
+.notification-entry:hover {
+    background: #f9f7ff;
+}
+
+.notification-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+/* Force icons small — giant icons were the visible symptom of the bug */
+.notification-icon svg {
+    width: 12px !important;
+    height: 12px !important;
+    display: block;
+    stroke-width: 2.5;
+}
+
+.notification-icon.sit_in {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+.notification-icon.logout {
+    background: #fff3e0;
+    color: #e65100;
+}
+
+.notification-icon.announcement {
+    background: #ede7f6;
+    color: var(--purple);
+}
+
+.notification-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.notification-message {
+    font-size: 0.75rem;
+    color: var(--text);
+    line-height: 1.3;
+    word-break: break-word;
+}
+
+.notification-time {
+    font-size: 0.65rem;
+    color: var(--muted);
+    margin-top: 2px;
+}
+
+.notification-empty {
+    padding: 20px 12px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.78rem;
+}
+
+/* ── STATUS INDICATOR ── */
+.status-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.78rem;
+    font-weight: 500;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.status-indicator.active {
+    color: #2e7d32;
+}
+
+.status-indicator.active .status-dot {
+    background: #43a047;
+    box-shadow: 0 0 0 2px #c8e6c9;
+}
+
+.status-indicator.inactive {
+    color: var(--muted);
+}
+
+.status-indicator.inactive .status-dot {
+    background: var(--muted);
+}
+
+/* ── DASHBOARD GRID LAYOUT ── */
+.dashboard-container {
+    display: grid;
+    grid-template-columns: 320px 1fr 1fr;
+    gap: 1.5rem;
+    padding: 100px 2.5rem 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* ── PANEL STYLING ── */
+.info-panel, .announcement-panel, .rules-panel {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+    display: flex;
+    flex-direction: column;
+    animation: slideUp 0.5s ease both;
+}
+
+.panel-header {
+    background: var(--purple);
+    color: #fff;
+    padding: 0.9rem 1.2rem;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+/* ── STUDENT INFO PANEL ── */
+.profile-card {
+    padding: 1.5rem;
+}
+
+.avatar-frame {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 1.5rem;
+    border: 3px solid var(--gold);
+    border-radius: 12px;
+    overflow: hidden;
+    background: #f0f0f0;
+}
+
+.avatar-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.info-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.info-item {
+    font-size: 0.82rem;
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 0.5rem;
+    display: flex;
+    align-items: baseline;
+}
+
+.info-item .label {
+    font-weight: 700;
+    color: var(--purple-dk);
+    width: 85px;
+    flex-shrink: 0;
+}
+
+.info-item .val {
+    color: var(--text);
+}
+
+/* ── SCROLLABLE BOXES ── */
+.scroll-box {
+    padding: 1.5rem;
+    height: 500px;
+    overflow-y: auto;
+}
+
+.post {
+    background: #FAFAFE;
+    padding: 1.2rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    border-left: 4px solid var(--gold);
+}
+
+.post-meta {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--purple);
+    margin-bottom: 0.5rem;
+}
+
+.rules-content {
+    text-align: left;
+}
+
+.rules-content h3, .rules-content h4 {
+    text-align: center;
+    color: var(--purple);
+    margin-bottom: 0.5rem;
+}
+
+.rules-content ol {
+    margin-top: 1.2rem;
+    padding-left: 1.2rem;
+    font-size: 0.85rem;
+    line-height: 1.7;
+    color: var(--text);
+}
+
+/* ── FOOTER ── */
+footer {
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 0.75rem;
+    color: var(--white);
+    opacity: 0.8;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1100px) {
+    .dashboard-container {
+        grid-template-columns: 1fr;
+        padding: 90px 1.5rem 20px;
+    }
+    .scroll-box {
+        height: auto;
+        max-height: 400px;
+    }
+    .notification-dropdown {
+        right: 1.5rem;
+        width: 260px;
+    }
+}
